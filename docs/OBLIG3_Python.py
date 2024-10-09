@@ -1,7 +1,13 @@
 import json
+import unittest
+import dataclasses
+
+
 
 with open(r'C:\Users\krist\OneDrive - Universitetet i Agder\Skrivebord\MOCK_DATA2.json', 'r') as file:
     data = json.load(file)
+
+#################################################################################################
 
 def find_person(identifier):
     identifier = str(identifier) 
@@ -17,11 +23,18 @@ print(Darcy) # Svaret blir 1
 John = find_person("John")
 print(John) # Person not on the list
 
+###############################################################
+
 def my_str_len(s: str) -> int:
     if s == "":
         return 0
     return 1 + my_str_len(s[1:])
 
+#eksempel på bruk
+string = my_str_len("Ukraina")
+print(string)
+
+#####################################################################
 
 def my_max(lst: list) -> int:
     if len(lst) == 1:
@@ -29,12 +42,15 @@ def my_max(lst: list) -> int:
     max_of_rest = my_max(lst[1:])
     return lst[0] if lst[0] > max_of_rest else max_of_rest
 
+#######################################################################
 
 def moon_weight(earth_weight: float) -> float:
     return earth_weight * (1/6)
 
 earth_weight = 100  
 print(moon_weight(earth_weight))
+
+########################################################################
 
 #funksjon for å gjøre tall til strings
 def num_to_string(numbers):
@@ -45,6 +61,7 @@ numbers = [5, -7, 0, 2, -11, 0.1]
 resultat = num_to_string(numbers)
 print(resultat)
 
+#########################################################################
 
 def has_string_five(strings):
     return any(len(s) == 5 for s in strings)   
@@ -54,6 +71,7 @@ strings = ["inforsmasjonssystemer", "lort", "pepsi", "katt", "snusboks"]
 resultat1 = has_string_five(strings)
 print(resultat1)
 
+#########################################################################
 
 def even_numbers(numbers):
     return [num for num in numbers if 10 <= num <= 20 and num % 2 == 0]
@@ -63,4 +81,30 @@ mockdata_tall = [7, 12, 14, 28, 9, 11, 13, 18]
 resultat2 = even_numbers(mockdata_tall)
 print(resultat2)
 
+###########################################################################
 
+def all_z_words(wordlist : list) -> list:
+    """produce list of words from the input that contain z"""
+    zlist = [] # start with an empty list
+    for wd in wordlist:
+        if "z" in wd:
+            zlist = [wd] + zlist
+    return(zlist)
+
+# tester for all_z_words
+print(all_z_words(['zimbabwe', 'pizza', 'alzheimers']))
+print(all_z_words(['home', 'computer', 'table']))
+
+# andre versjonen av funksjonen
+
+def all_z_words2(wordlist : list) -> list:
+    return list(filter(lambda wd: 'z' in wd, wordlist))
+
+# tester andre funksjon
+print(all_z_words2(['zimbabwe', 'pizzakutter', 'chorizo']))
+print(all_z_words2(['egg', 'panne', 'mengde']))
+
+####################################################################'
+
+
+      
