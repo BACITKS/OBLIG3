@@ -105,6 +105,45 @@ print(all_z_words2(['zimbabwe', 'pizzakutter', 'chorizo']))
 print(all_z_words2(['egg', 'panne', 'mengde']))
 
 ####################################################################'
+class Room:
+    room: str
+    seats: int
 
+classrooms = {
+    "room1": {"room": "room1", "seats": 30},
+    "room2": {"room": "room2", "seats": 75},
+    "room3": {"room": "room3", "seats": 28},
+    "room4": {"room": "room4", "seats": 40},
+    "room5": {"room": "room5", "seats": 100}
+}
+
+#funksjon for å finne antall seter
+def num_of_seats(for_code: str, rooms: dict) -> int:
+    '''Finne antall seter i et klasserom'''
+    if for_code in rooms:
+        return rooms[for_code]["seats"]
+    return None
+
+# eksempler
+print(num_of_seats("room4", classrooms)) # Output: 40
+print(num_of_seats("room1", classrooms)) # Output: 30
 
       
+#funksjon for å legge til 10 seter til et rom
+def increase_seats(for_code: str, rooms: dict) -> None:
+    if for_code in rooms:
+        rooms[for_code]["seats"] += 10
+
+# eksempel på increase_seats
+increase_seats("room1", classrooms)
+print(classrooms["room1"]["seats"])
+
+
+# finne alle klasserom med kapasitet for 50
+above_50 = []
+
+for room_code in classrooms:
+    if classrooms[room_code]["seats"] > 50:
+        above_50.append(classrooms[room_code])
+
+print(above_50)
