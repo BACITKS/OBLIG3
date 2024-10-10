@@ -1,3 +1,4 @@
+
 def my_str_len(s: str) -> int:
     if s == "":
         return 0
@@ -9,10 +10,18 @@ print(string)
 
 #####################################################################
 
-def my_max(lst: list) -> int:
-    if len(lst) == 1:
-        return lst[0]
-    max_of_rest = my_max(lst[1:])
-    return lst[0] if lst[0] > max_of_rest else max_of_rest
+def my_max(lst):
+    if not lst:
+        return None
+    max_value = lst[0]
+    for num in lst:
+        if num > max_value:
+            max_value = num
+            return max_value
+        
+my_list = [1, 20, 7, 12, 4]
+print(my_max(my_list))
 
-print(my_max([1, 2, 3, 4, 5])) # Output 5
+
+
+

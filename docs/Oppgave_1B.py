@@ -7,8 +7,6 @@ import dataclasses
 with open(r'C:\Users\krist\OneDrive - Universitetet i Agder\Skrivebord\MOCK_DATA2.json', 'r') as file:
     data = json.load(file)
 
-
-
 def find_person(identifier):
     identifier = str(identifier) 
     for person in data:
@@ -22,3 +20,4 @@ print(Darcy) # Svaret blir 1 (Gruppe)
 
 John = find_person("John")
 print(John) # Person not on the list
+
