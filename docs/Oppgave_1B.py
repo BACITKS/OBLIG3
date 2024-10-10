@@ -18,7 +18,7 @@ def find_person(identifier):
 
 # Eksempel på bruk
 Darcy = find_person("Darcy")
-print(Darcy) # Svaret blir 1
+print(Darcy) # Svaret blir 1 (Gruppe)
 
 John = find_person("John")
 print(John) # Person not on the list
