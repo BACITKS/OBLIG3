@@ -4,7 +4,7 @@ def moon_weight(earth_weight: float) -> float:
     return earth_weight * (1/6)
 
 earth_weight = 100  
-print(moon_weight(earth_weight))
+print(moon_weight(earth_weight)) # Output = 16.666666666666664
 
 ########################################################################
 
@@ -40,8 +40,7 @@ print(resultat2)
 ###########################################################################
 
 def all_z_words(wordlist : list) -> list:
-    """produce list of words from the input that contain z"""
-    zlist = [] # start with an empty list
+    zlist = [] 
     for wd in wordlist:
         if "z" in wd:
             zlist = [wd] + zlist

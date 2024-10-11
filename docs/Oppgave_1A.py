@@ -6,7 +6,7 @@ def my_str_len(s: str) -> int:
 
 #eksempel på bruk
 string = my_str_len("Ukraina")
-print(string)
+print(string) # Output = 7
 
 #####################################################################
 
@@ -20,7 +20,7 @@ def my_max(lst):
             return max_value
         
 my_list = [1, 20, 7, 12, 4]
-print(my_max(my_list))
+print(my_max(my_list)) # Output = 7
 
 
 
