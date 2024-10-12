@@ -21,7 +21,3 @@ def my_max(lst):
         
 my_list = [1, 20, 7, 12, 4]
 print(my_max(my_list)) # Output = 7
-
-
-
-
