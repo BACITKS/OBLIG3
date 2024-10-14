@@ -1,5 +1,8 @@
 import gspread as gs
 import pandas as pd
+import altair as alt
+import altair_viewer as altv
+
 
 # Få tilgang til Google Cloud (gc)
 gc = gs.api_key("AIzaSyBKrUqkbU3gsEujXEh8N3uQTN7fM0Dpg3I")
@@ -23,7 +26,7 @@ def finn_hoyeste_prosent(data: pd.DataFrame, aar: int) -> dict:
     hoyeste_kommuner = data[data[str(aar)] == hoyeste_verdi]['Region'].tolist()
     return {'hoyeste_verdi': hoyeste_verdi, 'kommuner': hoyeste_kommuner}
 
-# Tilpass DataFrame med riktige kolonnenavn (antatt fra 2015 til 2023)
+# Tilpass DataFrame med riktige kolonnenavn 
 df.columns = ['Region', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
 # Finn den høyeste prosentandelen for 2023
 resultat = finn_hoyeste_prosent(df, 2023)
@@ -101,3 +104,42 @@ resultat_gjennomsnitt = finn_laveste_gjennomsnitt(df, 2015, 2023)
 # Skriv ut resultatet
 print(f"Den laveste gjennomsnittlige prosentandelen fra 2015 til 2023 er {resultat_gjennomsnitt['laveste_gjennomsnitt']}%.")
 print(f"Kommuner med lavest gjennomsnittlig prosentandel: {', '.join(resultat_gjennomsnitt['kommuner'])}")
+
+##############################################################################################################################
+
+#Finne gjennomsnitt for alle kommuner i et spesifikt år
+aar = '2023'
+
+df[aar] = pd.to_numeric(df[aar], errors='coerce')
+
+gjennomsnitt_for_aar = df[aar].mean()
+
+print(f"Den gjennomsnittlige prosentandelen for alle kommuner i {aar} er {gjennomsnitt_for_aar:.2f}%.")
+
+##############################################################################################################
+
+#Lage et diagram for en spesifikk kommune
+
+kommune = 'Halden'
+
+kommune_data = df[df['Region'] == kommune]
+
+kommune_data_long = kommune_data.melt(id_vars='Region', value_vars=['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+                                      var_name='År', value_name='Prosent')
+
+# Lag et Altair-diagram som viser prosentandelen for årene 2015-2023
+chart = alt.Chart(kommune_data_long).mark_line(point=True).encode(
+    x='År',
+    y='Prosent',
+    tooltip=['År', 'Prosent']
+).properties(
+    title=f'Prosentandel av barn i ett- og to-årsalderen i barnehagen for {kommune} (2015-2023)'
+)
+
+# lagre diagrammet som html
+chart.save('kommune_prosent_diagram.html')
+
+print("Diagrammet er lagret som 'kommune_prosent_diagram.html'. Åpne filen i en nettleser for å se diagrammet.")
+
+
+
