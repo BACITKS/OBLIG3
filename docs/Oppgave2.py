@@ -120,30 +120,5 @@ print(f"Den gjennomsnittlige prosentandelen for alle kommuner i {aar} er {gjenno
 
 #Lage et diagram for en spesifikk kommune
 
-kommune = 'Longyearbyen'
-
-kommune_data = df[df['Region'] == kommune]
-
-# Smelt dataene til langt format for Altair, og velg årstallene 2015-2023
-kommune_data_long = kommune_data.melt(id_vars='Region', 
-                                      value_vars=['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
-                                      var_name='År', value_name='Prosent')
-
-# Konverter 'Prosent' til numeriske verdier
-kommune_data_long['Prosent'] = pd.to_numeric(kommune_data_long['Prosent'], errors='coerce')
-
-# Lag et Altair-diagram som viser prosentandelen for årene 2015-2023
-chart = alt.Chart(kommune_data_long).mark_line(point=True).encode(
-    x='År',
-    y='Prosent',
-    tooltip=['År', 'Prosent']
-).properties(
-    title=f'Prosentandel av barn i ett- og to-årsalderen i barnehagen for {kommune} (2015-2023)'
-)
-
-# Prøv å vise diagrammet med altair_viewer
-altv.show(chart)
-
-
 
 
