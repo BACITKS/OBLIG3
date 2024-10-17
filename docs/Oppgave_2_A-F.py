@@ -21,28 +21,28 @@ df[['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']] = d
 # fjerner rader med NaN-verdier
 df_2023 = df.dropna(subset=['2023'])
 
-# Høyeste prosentandel i 2023
+# Høyeste prosentandel i 2023 (A)
 hoyeste_verdi_2023 = df_2023['2023'].max()
 hoyeste_kommuner_2023 = df_2023[df_2023['2023'] == hoyeste_verdi_2023]['Region'].tolist()
 print(f"Den høyeste prosentandelen i 2023 er {hoyeste_verdi_2023}%: {', '.join(hoyeste_kommuner_2023)}")
 #-------------------------------------------------------------------------------------------------------
-# Laveste prosentandel i 2023
+# Laveste prosentandel i 2023 (B)
 laveste_verdi_2023 = df_2023['2023'].min()
 laveste_kommuner_2023 = df_2023[df_2023['2023'] == laveste_verdi_2023]['Region'].tolist()
 print(f"Den laveste prosentandelen i 2023 er {laveste_verdi_2023}%: {','.join(laveste_kommuner_2023)}")
 #-------------------------------------------------------------------------------------------------------
-# Høyeste gjennomsnitt fra 2015 til 2023
+# Høyeste gjennomsnitt fra 2015 til 2023(C)
 df['gjennomsnitt'] = df[['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']].mean(axis=1)
 hoyeste_gjennomsnitt = df['gjennomsnitt'].max()
 hoyeste_kommuner_gjennomsnitt = df[df['gjennomsnitt'] == hoyeste_gjennomsnitt]['Region'].tolist()
 print(f"Den høyeste gjennomsnittlige prosenten mellom 2015 og 2023 er {hoyeste_gjennomsnitt}%: {', '.join(hoyeste_kommuner_gjennomsnitt)}")
 #----------------------------------------------------------------------------------------------------------------------
-# Laveste gjennomsnitt fra 2015 til 2023
+# Laveste gjennomsnitt fra 2015 til 2023(D)
 laveste_gjennomsnitt = df['gjennomsnitt'].min()
 laveste_kommuner_gjennomsnitt = df[df['gjennomsnitt'] == laveste_gjennomsnitt]['Region'].tolist()
 print(f"Den laveste gjennomsnittlige prosentandelen mellom 2015 og 2023 er{laveste_gjennomsnitt}%: {', '.join(laveste_kommuner_gjennomsnitt)}")
 #--------------------------------------------------------------------------------------------------------------------------
-#Gjennomsnitt for alle kommuneri et spesifikt år
+#Gjennomsnitt for alle kommuneri et spesifikt år(E)
 aar = '2023'
 
 df[aar] = pd.to_numeric(df[aar], errors='coerce')
