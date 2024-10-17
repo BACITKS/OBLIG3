@@ -31,3 +31,36 @@ output_html = 'C:/OBLIG3/docs/Oppgave_G_horizontal.html'
 chart.save(output_html)
 
 print(f"Diagram lagret som {output_html}.")
+
+########### Siste Oppgave ############
+
+#fikk problemer med den første raden som hadde årstall så fjerner den
+df = df.drop(0)
+
+df_clean = df.dropna(subset=year_columns)
+
+# Calculate the average percentage from 2015 to 2023 for each municipality
+df_clean['average_percentage'] = df_clean[year_columns].mean(axis=1)
+
+# Sort the municipalities by the average percentage and select the top 10
+top_10_municipalities = df_clean.nlargest(10, 'average_percentage')
+
+# Reshape the data to long format for visualization
+top_10_long = top_10_municipalities.melt(id_vars='Region', value_vars=year_columns,
+                                         var_name='År', value_name='Prosent')
+
+# Create a bar chart showing the average percentage for the top 10 municipalities
+chart = alt.Chart(top_10_long).mark_bar().encode(
+    x=alt.X('Region:N', title='Kommune', sort='-y'),
+    y=alt.Y('Prosent:Q', title='Prosentandel (%)'),
+    color='År:N',
+    tooltip=['År', 'Prosent']
+).properties(
+    title='Gjennomsnittlig prosentandel av barn i ett- og to-årsalderen i barnehagen (2015-2023) for topp 10 kommuner'
+)
+
+# Save the chart to an HTML file
+output_html = 'C:/OBLIG3/docs/Oppgave_H.html'
+chart.save(output_html)
+
+print(f"Diagram lagret som {output_html}. Åpne filen i en nettleser for å se diagrammet.")
