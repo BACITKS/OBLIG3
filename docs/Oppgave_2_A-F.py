@@ -47,29 +47,13 @@ laveste_kommuner_gjennomsnitt = df[df['gjennomsnitt'] == laveste_gjennomsnitt]['
 print(f"Den laveste gjennomsnittlige prosentandelen fra 2015 til 2023 er {laveste_gjennomsnitt}%.")
 print(f"Kommuner med laveste gjennomsnittlig prosentandel: {', '.join(laveste_kommuner_gjennomsnitt)}")
 
-###
+#Gjennomsnitt for alle kommuneri et spesifikt år
+aar = '2023'
 
-kommune = 'Longyearbyen'
+df[aar] = pd.to_numeric(df[aar], errors='coerce')
 
-# Filtrer dataene for den valgte kommunen
-kommune_data = df[df['Region'] == kommune]
+gjennomsnitt_for_aar = df[aar].mean()
 
-# Smelt dataene til langt format for Altair, og velg årstallene 2015-2023
-kommune_data_long = kommune_data.melt(id_vars='Region', 
-                                      value_vars=['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
-                                      var_name='År', value_name='Prosent')
+print(f"Den gjennomsnittlige prosentandelen for alle kommuner i {aar} er {gjennomsnitt_for_aar:.2f}%.")
 
-# Konverter 'Prosent' til numeriske verdier
-kommune_data_long['Prosent'] = pd.to_numeric(kommune_data_long['Prosent'], errors='coerce')
 
-# Lag et horisontalt stolpediagram
-chart = alt.Chart(kommune_data_long).mark_bar().encode(
-    y=alt.Y('År', sort='-x'),  # Sorter årene fra 2015 til 2023
-    x='Prosent',
-    tooltip=['År', 'Prosent']
-).properties(
-    title=f'Prosentandel av barn i ett- og to-årsalderen i barnehagen for {kommune} (2015-2023)'
-)
-
-# Lagre diagrammet som en HTML-fil
-chart.save('Oppgave_G.html')
