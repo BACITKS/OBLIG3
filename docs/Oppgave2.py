@@ -120,5 +120,34 @@ print(f"Den gjennomsnittlige prosentandelen for alle kommuner i {aar} er {gjenno
 
 #Lage et diagram for en spesifikk kommune
 
+file_path = r"ssb-barnehager-2015-2023-alder-1-2-aar.xlsm"
+df = pd.read_excel(file_path, sheet_name="KOSandel120000", header=2)
 
+# Velg kommune (Longyearbyen)
+kommune = 'Longyearbyen'
+
+# Filtrer dataene for den valgte kommunen
+kommune_data = df[df['Region'] == kommune]
+
+# Smelt dataene til langt format for Altair, og velg årstallene 2015-2023
+kommune_data_long = kommune_data.melt(id_vars='Region', 
+                                      value_vars=['2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023'],
+                                      var_name='År', value_name='Prosent')
+
+# Konverter 'Prosent' til numeriske verdier
+kommune_data_long['Prosent'] = pd.to_numeric(kommune_data_long['Prosent'], errors='coerce')
+
+# Lag et horisontalt stolpediagram
+chart = alt.Chart(kommune_data_long).mark_bar().encode(
+    y=alt.Y('År', sort='-x'),  # Sorter årene fra 2015 til 2023
+    x='Prosent',
+    tooltip=['År', 'Prosent']
+).properties(
+    title=f'Prosentandel av barn i ett- og to-årsalderen i barnehagen for {kommune} (2015-2023)'
+)
+
+# Lagre diagrammet som en HTML-fil
+chart.save('Oppgave_G.html')
+
+#####################################################################################################3
 
