@@ -17,21 +17,21 @@ kommune_data_long = kommune_data.melt(id_vars='Region', value_vars=year_columns,
                                       var_name='År', value_name='Prosent')
 
 chart = alt.Chart(kommune_data_long).mark_bar().encode(
-    x=alt.X('År:N', title='År'),  # Years as nominal values on x-axis
-    y=alt.Y('Prosent:Q', title='Prosent'),  # Prosent on y-axis
-    color=alt.Color('År:N', title='År'),  # Different colors for each year
+    x=alt.X('År:N', title='År'),  
+    y=alt.Y('Prosent:Q', title='Prosent'),  
+    color=alt.Color('År:N', title='År'),  
     tooltip=['År', 'Prosent']
 ).properties(
     title=f'Prosentandel av barn i ett- og to-årsalderen i barnehagen for {kommune} (2015-2023)'
 )
 
 # Gjør diagrammet til en HTML fil for å visualisere den
-output_html = 'C:/OBLIG3/docs/Oppgave_G_horizontal.html'
+output_html = 'C:/OBLIG3/docs/Oppgave_G.html'
 chart.save(output_html)
 
 print(f"Diagram lagret som {output_html}.")
 
-########### Siste Oppgave ############
+########### Siste Oppgave (H) ############
 
 #fikk problemer med den første raden som hadde årstall så fjerner den
 df = df.drop(0)
