@@ -4,9 +4,9 @@ import altair as alt
 import altair_viewer as altv
 
 
-gc = gs.api_key("AIzaSyBKrUqkbU3gsEujXEh8N3uQTN7fM0Dpg3I")
+gc = gs.api_key # Janis sin API-key, fjernet denne etter jeg har pusha for at igen skal se den
 
-sh = gc.open_by_key('1ucR3o1pwXMAuGT57XybkwzFxsq2x3QbKV4Oj_MYsjaQ')
+sh = gc.open_by_key # Samme her, fjernet det som ikke skal ligge offentlig
 
 wsh = sh.worksheet("KOSandel120000")
 
